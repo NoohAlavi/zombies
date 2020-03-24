@@ -4,7 +4,7 @@ using System;
 public class Zombie : KinematicBody2D
 {
     [Export] public Vector2 Velocity = new Vector2();
-    [Export] public float FollowSpeed = 100f;
+    [Export] public float FollowSpeed = 200f;
     [Export] public float Gravity = 500f;
     [Export] public float Health = 5f;
     [Export] public string State = "Passive";
@@ -12,9 +12,9 @@ public class Zombie : KinematicBody2D
     private Player _player;
     private RayCast2D _rayCast;
     private Node2D _bloodParticlesHolder;
-    private Sprite _sprite;
     private AnimatedSprite _animatedSprite;
     private CollisionShape2D _collisionShape;
+    private Timer _showBloodTimer;
 
     [Export] private float _rayCastLength = 50f;
     [Export] private float _scale = 3f;
@@ -26,9 +26,10 @@ public class Zombie : KinematicBody2D
         _player = GetNode<Player>("/root/World/Player");
         _rayCast = GetNode<RayCast2D>("RayCast2D");
         _bloodParticlesHolder = GetNode<Node2D>("BloodParticlesHolder");
-        _sprite = GetNode<Sprite>("Sprite");
         _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
         _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+        _showBloodTimer = GetNode<Timer>("ShowBloodTimer");
+        _showBloodTimer.Connect("timeout", this, "HideBlood");
     }
 
     public override void _PhysicsProcess(float delta)
@@ -82,10 +83,14 @@ public class Zombie : KinematicBody2D
         }
     }
 
-    public async void ShowBlood()
+    public void ShowBlood()
     {
         _bloodParticlesHolder.Show();
-        await ToSignal(GetTree().CreateTimer(.5f), "timeout");
+        _showBloodTimer.Start(.5f);
+    }
+
+    public void HideBlood()
+    {
         _bloodParticlesHolder.Hide();
     }
 

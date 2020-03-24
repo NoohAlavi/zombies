@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MainMenu/MainMenu.cs" type="Script" id=1]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 72.0
+margin_right = 385.0
+margin_bottom = 86.0
+rect_scale = Vector2( 4, 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Zombie Game Thing"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="."]
+margin_left = 456.0
+margin_top = 264.0
+margin_right = 494.0
+margin_bottom = 284.0
+rect_scale = Vector2( 3, 3 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}

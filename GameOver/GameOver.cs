@@ -13,6 +13,6 @@ public class GameOver : Control
 
     public void OnRetryButtonPressed()
     {
-        GetTree().ChangeScene("res://World/World.tscn");
+        GetTree().ChangeScene("res://MainMenu/MainMenu.tscn");
     }
 }
