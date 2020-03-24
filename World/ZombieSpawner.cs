@@ -17,7 +17,7 @@ public class ZombieSpawner : Node2D
     public void OnSpawnTimerTimeout()
     {
         Zombie zombie = _zombieScene.Instance() as Zombie;
-        zombie.Position = new Vector2(GD.Randi() % 2200, 300);
+        zombie.Position = new Vector2(GD.Randi() % 2200, 400);
 
         GetNode("ZombieHolder").AddChild(zombie);
     }
