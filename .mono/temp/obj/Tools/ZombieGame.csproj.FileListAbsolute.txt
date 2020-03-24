@@ -1,0 +1,5 @@
+C:\Users\nooha\Desktop\GameDev\ZombieGame\.mono\temp\bin\Tools\ZombieGame.dll
+C:\Users\nooha\Desktop\GameDev\ZombieGame\.mono\temp\bin\Tools\ZombieGame.pdb
+C:\Users\nooha\Desktop\GameDev\ZombieGame\.mono\temp\obj\Tools\ZombieGame.csprojAssemblyReference.cache
+C:\Users\nooha\Desktop\GameDev\ZombieGame\.mono\temp\obj\Tools\ZombieGame.dll
+C:\Users\nooha\Desktop\GameDev\ZombieGame\.mono\temp\obj\Tools\ZombieGame.pdb
