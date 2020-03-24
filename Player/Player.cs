@@ -92,10 +92,9 @@ public class Player : KinematicBody2D
     private void Shoot()
     {
         Bullet bullet = _bulletScene.Instance() as Bullet;
+        GetNode("/root/World/BulletHolder").AddChild(bullet);
         bullet.Direction = Position.DirectionTo(GetGlobalMousePosition());
         bullet.Position = Position;
         bullet.LookAt(GetGlobalMousePosition());
-
-        GetNode("/root/World/BulletHolder").AddChild(bullet);
     }
 }

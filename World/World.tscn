@@ -636,10 +636,10 @@ autostart = true
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" type="TextureProgress" parent="HUD"]
-margin_left = 1.90735e-06
-margin_top = -1.0
-margin_right = 64.0
-margin_bottom = 63.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 328.0
+margin_bottom = 72.0
 max_value = 500.0
 value = 500.0
 texture_under = ExtResource( 2 )
@@ -653,11 +653,11 @@ __meta__ = {
 visible = false
 
 [node name="ScoreLabel" type="Label" parent="HUD"]
-margin_left = 8.0
-margin_top = 32.0
-margin_right = 59.0
-margin_bottom = 46.0
-rect_scale = Vector2( 3, 3 )
+margin_left = 16.0
+margin_top = 48.0
+margin_right = 67.0
+margin_bottom = 62.0
+rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Score: 0"
 __meta__ = {

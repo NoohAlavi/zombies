@@ -1,0 +1,5 @@
+C:\Users\nooha\Documents\GitHub\zombies\.mono\temp\bin\Debug\ZombieGame.dll
+C:\Users\nooha\Documents\GitHub\zombies\.mono\temp\bin\Debug\ZombieGame.pdb
+C:\Users\nooha\Documents\GitHub\zombies\.mono\temp\obj\Debug\ZombieGame.csprojAssemblyReference.cache
+C:\Users\nooha\Documents\GitHub\zombies\.mono\temp\obj\Debug\ZombieGame.dll
+C:\Users\nooha\Documents\GitHub\zombies\.mono\temp\obj\Debug\ZombieGame.pdb
