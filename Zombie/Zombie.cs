@@ -15,8 +15,9 @@ public class Zombie : KinematicBody2D
     private AnimatedSprite _animatedSprite;
     private CollisionShape2D _collisionShape;
     private Timer _showBloodTimer;
+    private Timer _deathTimer;
 
-    [Export] private float _rayCastLength = 50f;
+    [Export] private float _rayCastLength = 40f;
     [Export] private float _scale = 3f;
 
     private bool _isDead = false;
@@ -30,6 +31,13 @@ public class Zombie : KinematicBody2D
         _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
         _showBloodTimer = GetNode<Timer>("ShowBloodTimer");
         _showBloodTimer.Connect("timeout", this, "HideBlood");
+        _deathTimer = GetNode<Timer>("DeathTimer");
+        _deathTimer.Connect("timeout", this, "Destroy");
+    }
+
+    public override void _Process(float delta)
+    {
+        GD.Print(_deathTimer.TimeLeft);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -94,7 +102,7 @@ public class Zombie : KinematicBody2D
         _bloodParticlesHolder.Hide();
     }
 
-    private async void Die()
+    private void Die()
     {
         _animatedSprite.Play("Death");
         _rayCast.Enabled = false;
@@ -102,7 +110,11 @@ public class Zombie : KinematicBody2D
         _collisionShape.Disabled = true;
         Position = new Vector2(Position.x, 400f);
         Gravity = 0f;
-        await ToSignal(GetTree().CreateTimer(10f), "timeout");
+        _deathTimer.Start();
+    }
+
+    public void Destroy()
+    {
         QueueFree();
     }
 }

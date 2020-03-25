@@ -53,6 +53,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AmmoBox\AmmoBox.cs" />
     <Compile Include="Bullet\Bullet.cs" />
     <Compile Include="GameOver\GameOver.cs" />
     <Compile Include="MainMenu\MainMenu.cs" />

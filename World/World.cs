@@ -8,6 +8,8 @@ public class World : Node2D
     private Label _scoreText;
     private PackedScene _zombieScene;
     private Player _player;
+    private Timer _ammoBoxSpawnTimer;
+    private PackedScene _ammoBoxScene;
 
     public float Score;
 
@@ -19,11 +21,15 @@ public class World : Node2D
         _scoreTimer = GetNode<Timer>("ScoreTimer");
         _scoreTimer.Connect("timeout", this, "OnScoreTimerTimeout");
 
+        _ammoBoxSpawnTimer = GetNode<Timer>("AmmoBoxSpawnTimer");
+        _ammoBoxSpawnTimer.Connect("timeout", this, "SpawnAmmoBox");
+
         _scoreText = GetNode<Label>("HUD/ScoreLabel");
 
         _player = GetNode<Player>("Player");
 
         _zombieScene = GD.Load<PackedScene>("res://Zombie/Zombie.tscn");
+        _ammoBoxScene = GD.Load<PackedScene>("res://AmmoBox/AmmoBox.tscn");
     }
 
     public override void _Process(float delta)
@@ -36,14 +42,21 @@ public class World : Node2D
         if (!_player.IsGameOver)
         {
             Zombie zombie = _zombieScene.Instance() as Zombie;
-            zombie.Position = new Vector2(GD.Randi() % 2200, 400);
 
             GetNode("ZombieHolder").AddChild(zombie);
+            zombie.Position = new Vector2(GD.Randi() % 2200, 400);
         }
     }
 
     public void OnScoreTimerTimeout()
     {
         Score++;
+    }
+
+    public void SpawnAmmoBox()
+    {
+        AmmoBox ammoBox = _ammoBoxScene.Instance() as AmmoBox;
+        GetNode("AmmoBoxHolder").AddChild(ammoBox);
+        ammoBox.Position = new Vector2(GD.Randi() % 2200, 400);
     }
 }

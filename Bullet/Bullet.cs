@@ -23,7 +23,6 @@ public class Bullet : Area2D
 
     public void _OnDespawnTimerTimeout()
     {
-        GD.Print("Despawned bruh");
         QueueFree();
     }
 

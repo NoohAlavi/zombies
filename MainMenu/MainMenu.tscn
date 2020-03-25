@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://MainMenu/MainMenu.cs" type="Script" id=1]
+[ext_resource path="res://Zombie/ZombieAnim/frame0000.png" type="Texture" id=2]
+[ext_resource path="res://Player/PlayerAnim/frame0000.png" type="Texture" id=3]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -14,15 +16,18 @@ __meta__ = {
 margin_right = 1024.0
 margin_bottom = 600.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
-margin_left = 256.0
+margin_left = 328.0
 margin_top = 72.0
-margin_right = 385.0
+margin_right = 457.0
 margin_bottom = 86.0
 rect_scale = Vector2( 4, 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Zombie Game Thing"
+text = "Zombie Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -37,3 +42,13 @@ text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ZombieIcon" type="Sprite" parent="."]
+position = Vector2( 168, 296 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 2 )
+
+[node name="frame0000" type="Sprite" parent="ZombieIcon"]
+position = Vector2( 71.2, 0.799994 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 3 )
