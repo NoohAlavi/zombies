@@ -8,6 +8,8 @@ public class Player : KinematicBody2D
     [Export] public float Gravity = 25f;
     [Export] public float JumpForce = 800f;
     [Export] public float Health = 500f;
+    [Export] public float Ammo = 50f;
+    [Export] public float Clips = 2f;
 
     public bool IsGameOver = false;
 
@@ -16,6 +18,8 @@ public class Player : KinematicBody2D
     private TextureProgress _healthBar;
     private CPUParticles2D _bloodParticles;
     private GameOver _gameOver;
+    private AudioStreamPlayer2D _shootSound;
+    private Label _ammoLabel;
 
     private float _scale = 3f;
 
@@ -24,8 +28,11 @@ public class Player : KinematicBody2D
         _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
         _healthBar = GetNode<TextureProgress>("/root/World/HUD/HealthBar");
         _bloodParticles = GetNode<CPUParticles2D>("BloodParticles");
-        _bulletScene = GD.Load<PackedScene>("res://Bullet/Bullet.tscn");
         _gameOver = GetNode<GameOver>("/root/World/HUD/GameOver");
+        _shootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
+        _ammoLabel = GetNode<Label>("/root/World/HUD/AmmoLabel");
+
+        _bulletScene = GD.Load<PackedScene>("res://Bullet/Bullet.tscn");
     }
 
     public override void _Process(float delta)
@@ -37,6 +44,8 @@ public class Player : KinematicBody2D
             IsGameOver = true;
             _gameOver.Show();
         }
+
+        _ammoLabel.Text = "Ammo: " + Ammo + "/" + Clips;
     }
 
     public override void _PhysicsProcess(float delta)
@@ -80,6 +89,11 @@ public class Player : KinematicBody2D
         {
             Shoot();
         }
+
+        if (Input.IsActionJustPressed("Reload"))
+        {
+            Reload();
+        }
     }
 
     public async void ShowBlood()
@@ -91,10 +105,24 @@ public class Player : KinematicBody2D
 
     private void Shoot()
     {
-        Bullet bullet = _bulletScene.Instance() as Bullet;
-        GetNode("/root/World/BulletHolder").AddChild(bullet);
-        bullet.Direction = Position.DirectionTo(GetGlobalMousePosition());
-        bullet.Position = Position;
-        bullet.LookAt(GetGlobalMousePosition());
+        if (Ammo > 0f)
+        {
+            Bullet bullet = _bulletScene.Instance() as Bullet;
+            GetNode("/root/World/BulletHolder").AddChild(bullet);
+            bullet.Direction = Position.DirectionTo(GetGlobalMousePosition());
+            bullet.Position = Position;
+            bullet.LookAt(GetGlobalMousePosition());
+            _shootSound.Play();
+            Ammo--;
+        }
+    }
+
+    private void Reload()
+    {
+        if (Clips > 0f)
+        {
+            Ammo = 50f;
+            Clips--;
+        }
     }
 }

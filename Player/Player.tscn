@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://Bullet/Bullet.wav" type="AudioStream" id=1]
 [ext_resource path="res://Player/Player.cs" type="Script" id=2]
 [ext_resource path="res://BloodParticles/BloodParticles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/PlayerAnim/frame0002.png" type="Texture" id=5]
@@ -8,7 +9,7 @@
 [ext_resource path="res://Player/PlayerAnim/frame0000.png" type="Texture" id=8]
 [ext_resource path="res://Player/PlayerAnim/frame0001.png" type="Texture" id=9]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
@@ -26,7 +27,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 48 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -35,11 +36,11 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -8, 0 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -50,3 +51,6 @@ smoothing_speed = 1.0
 visible = false
 position = Vector2( 0, 0 )
 gravity = Vector2( 0, 0 )
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
