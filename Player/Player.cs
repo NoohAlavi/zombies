@@ -38,7 +38,8 @@ public class Player : KinematicBody2D
     public override void _Process(float delta)
     {
         _healthBar.Value = Health;
-        if (Health <= 0f)
+
+        if (Health <= 0f || Position.y > 1800f)
         {
             MovementSpeed = 0f;
             IsGameOver = true;
