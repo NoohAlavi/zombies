@@ -8,6 +8,7 @@ public class World : Node2D
 
     private Timer _spawnTimer;
     private Timer _scoreTimer;
+    private Label _killsLabel;
     private Label _scoreText;
     private PackedScene _zombieScene;
     private Player _player;
@@ -31,17 +32,21 @@ public class World : Node2D
         _medKitSpawnTimer.Connect("timeout", this, "SpawnMedKit");
 
         _scoreText = GetNode<Label>("HUD/ScoreLabel");
+        _killsLabel = GetNode<Label>("HUD/KillsLabel");
 
         _player = GetNode<Player>("Player");
 
         _zombieScene = ResourceLoader.Load<PackedScene>("res://Zombie/Zombie.tscn");
         _ammoBoxScene = ResourceLoader.Load<PackedScene>("res://AmmoBox/AmmoBox.tscn");
-        _medKitScene = ResourceLoader.Load<PackedScene>("");
+        _medKitScene = ResourceLoader.Load<PackedScene>("res://MedKit/MedKit.tscn");
+
+        GD.Randomize();
     }
 
     public override void _Process(float delta)
     {
-        _scoreText.Text = "Score: " + Score.ToString();
+        _scoreText.Text = "Time: " + Score.ToString();
+        _killsLabel.Text = "Kills: " + _player.Kills.ToString();
         if (_player.IsGameOver)
         {
             _scoreTimer.Stop();
@@ -55,6 +60,7 @@ public class World : Node2D
             Zombie zombie = _zombieScene.Instance() as Zombie;
 
             GetNode("ZombieHolder").AddChild(zombie);
+
             zombie.Position = new Vector2(GD.Randi() % 2200, 400);
         }
     }
@@ -70,8 +76,8 @@ public class World : Node2D
 
     public void SpawnMedKit()
     {
-        MedKit mk = _medKitScene.Instance() as MedKit;
-        GetNode("MedKitHolder").AddChild(mk);
-        mk.Position = new Vector2(GD.Randi() % 2200, 400);
+        MedKit medKit = _medKitScene.Instance() as MedKit;
+        GetNode("MedKitHolder").AddChild(medKit);
+        medKit.Position = new Vector2(GD.Randi() % 2200, 400);
     }
 }

@@ -709,6 +709,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="KillsLabel" type="Label" parent="HUD"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 59.0
+margin_bottom = 46.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Kills: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 

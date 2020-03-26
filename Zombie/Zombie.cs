@@ -99,12 +99,16 @@ public class Zombie : KinematicBody2D
 
     private void Die()
     {
-        _animatedSprite.Play("Death");
-        _rayCast.Enabled = false;
-        _isDead = true;
-        _collisionShape.Disabled = true;
-        Position = new Vector2(Position.x, 400f);
-        Gravity = 0f;
+        if (!_isDead)
+        {
+            _animatedSprite.Play("Death");
+            _rayCast.Enabled = false;
+            _isDead = true;
+            _collisionShape.Disabled = true;
+            Position = new Vector2(Position.x, 400f);
+            Gravity = 0f;
+            _player.Kills++;
+        }
         // _deathTimer.Start();
     }
 

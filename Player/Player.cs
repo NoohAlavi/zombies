@@ -12,8 +12,10 @@ public class Player : KinematicBody2D
     [Export] public float Clips = 2f;
     [Export] public float Energy = 100f;
 
+
     public bool IsGameOver = false;
     public bool IsInputModeController = false;
+    public float Kills = 0f;
 
     private AnimatedSprite _animatedSprite;
     private PackedScene _bulletScene;
@@ -78,13 +80,13 @@ public class Player : KinematicBody2D
 
         if (Input.IsActionPressed("Sprint") && Math.Abs(Velocity.x) > 0f && Energy > 0f)
         {
-            MovementSpeed = 400f;
+            MovementSpeed = 600f;
             Energy -= 2f;
         }
         else
         {
             MovementSpeed = 200f;
-            Energy += .5f;
+            Energy += .25f;
         }
 
         if (Velocity.x > 0)
