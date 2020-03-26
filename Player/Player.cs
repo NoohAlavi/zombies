@@ -10,12 +10,15 @@ public class Player : KinematicBody2D
     [Export] public float Health = 500f;
     [Export] public float Ammo = 50f;
     [Export] public float Clips = 2f;
+    [Export] public float Energy = 100f;
 
     public bool IsGameOver = false;
+    public bool IsInputModeController = false;
 
     private AnimatedSprite _animatedSprite;
     private PackedScene _bulletScene;
     private TextureProgress _healthBar;
+    private TextureProgress _energyBar;
     private CPUParticles2D _bloodParticles;
     private GameOver _gameOver;
     private AudioStreamPlayer2D _shootSound;
@@ -27,17 +30,24 @@ public class Player : KinematicBody2D
     {
         _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
         _healthBar = GetNode<TextureProgress>("/root/World/HUD/HealthBar");
+        _energyBar = GetNode<TextureProgress>("/root/World/HUD/EnergyBar");
         _bloodParticles = GetNode<CPUParticles2D>("BloodParticles");
         _gameOver = GetNode<GameOver>("/root/World/HUD/GameOver");
         _shootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
         _ammoLabel = GetNode<Label>("/root/World/HUD/AmmoLabel");
 
         _bulletScene = GD.Load<PackedScene>("res://Bullet/Bullet.tscn");
+
+        if (Input.GetConnectedJoypads().Count > 0f)
+        {
+            IsInputModeController = true;
+        }
     }
 
     public override void _Process(float delta)
     {
         _healthBar.Value = Health;
+        _energyBar.Value = Energy;
 
         if (Health <= 0f || Position.y > 1800f)
         {
@@ -64,6 +74,17 @@ public class Player : KinematicBody2D
             {
                 _animatedSprite.Play("Idle");
             }
+        }
+
+        if (Input.IsActionPressed("Sprint") && Math.Abs(Velocity.x) > 0f && Energy > 0f)
+        {
+            MovementSpeed = 400f;
+            Energy -= 2f;
+        }
+        else
+        {
+            MovementSpeed = 200f;
+            Energy += .5f;
         }
 
         if (Velocity.x > 0)
@@ -106,13 +127,24 @@ public class Player : KinematicBody2D
 
     private void Shoot()
     {
+        Vector2 dir = new Vector2();
+        dir.x = Input.GetJoyAxis(0, 2);
+        dir.y = Input.GetJoyAxis(0, 3);
         if (Ammo > 0f)
         {
             Bullet bullet = _bulletScene.Instance() as Bullet;
             GetNode("/root/World/BulletHolder").AddChild(bullet);
-            bullet.Direction = Position.DirectionTo(GetGlobalMousePosition());
             bullet.Position = Position;
+            // if (!IsInputModeController)
+            // {
             bullet.LookAt(GetGlobalMousePosition());
+            bullet.Direction = Position.DirectionTo(GetGlobalMousePosition());
+            // }
+            // else
+            // {
+            // bullet.LookAt(dir);
+            // bullet.Direction = dir;
+            // }
             _shootSound.Play();
             Ammo--;
         }

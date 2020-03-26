@@ -19,6 +19,8 @@ script = ExtResource( 4 )
 [node name="AmmoBox" parent="AmmoBoxHolder" instance=ExtResource( 7 )]
 position = Vector2( 232, 416 )
 
+[node name="MedKitHolder" type="Node2D" parent="."]
+
 [node name="Ground" type="Node" parent="."]
 
 [node name="0" type="StaticBody2D" parent="Ground"]
@@ -640,6 +642,10 @@ autostart = true
 wait_time = 60.0
 autostart = true
 
+[node name="MedKitSpawnTimer" type="Timer" parent="."]
+wait_time = 120.0
+autostart = true
+
 [node name="ScoreTimer" type="Timer" parent="."]
 autostart = true
 
@@ -656,6 +662,22 @@ value = 500.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 2 )
 tint_under = Color( 0, 0, 0, 1 )
+tint_progress = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyBar" type="TextureProgress" parent="HUD"]
+margin_left = 184.0
+margin_top = 40.0
+margin_right = 504.0
+margin_bottom = 104.0
+rect_scale = Vector2( 2, 1 )
+value = 100.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 2 )
+tint_under = Color( 0, 0, 0, 1 )
+tint_progress = Color( 1, 0.890196, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

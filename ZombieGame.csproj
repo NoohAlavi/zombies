@@ -57,6 +57,7 @@
     <Compile Include="Bullet\Bullet.cs" />
     <Compile Include="GameOver\GameOver.cs" />
     <Compile Include="MainMenu\MainMenu.cs" />
+    <Compile Include="MedKit\MedKit.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="World\World.cs" />

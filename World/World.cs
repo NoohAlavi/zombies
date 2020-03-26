@@ -3,15 +3,18 @@ using System;
 
 public class World : Node2D
 {
+
+    public float Score;
+
     private Timer _spawnTimer;
     private Timer _scoreTimer;
     private Label _scoreText;
     private PackedScene _zombieScene;
     private Player _player;
     private Timer _ammoBoxSpawnTimer;
+    private Timer _medKitSpawnTimer;
     private PackedScene _ammoBoxScene;
-
-    public float Score;
+    private PackedScene _medKitScene;
 
     public override void _Ready()
     {
@@ -24,17 +27,25 @@ public class World : Node2D
         _ammoBoxSpawnTimer = GetNode<Timer>("AmmoBoxSpawnTimer");
         _ammoBoxSpawnTimer.Connect("timeout", this, "SpawnAmmoBox");
 
+        _medKitSpawnTimer = GetNode<Timer>("MedKitSpawnTimer");
+        _medKitSpawnTimer.Connect("timeout", this, "SpawnMedKit");
+
         _scoreText = GetNode<Label>("HUD/ScoreLabel");
 
         _player = GetNode<Player>("Player");
 
-        _zombieScene = GD.Load<PackedScene>("res://Zombie/Zombie.tscn");
-        _ammoBoxScene = GD.Load<PackedScene>("res://AmmoBox/AmmoBox.tscn");
+        _zombieScene = ResourceLoader.Load<PackedScene>("res://Zombie/Zombie.tscn");
+        _ammoBoxScene = ResourceLoader.Load<PackedScene>("res://AmmoBox/AmmoBox.tscn");
+        _medKitScene = ResourceLoader.Load<PackedScene>("");
     }
 
     public override void _Process(float delta)
     {
         _scoreText.Text = "Score: " + Score.ToString();
+        if (_player.IsGameOver)
+        {
+            _scoreTimer.Stop();
+        }
     }
 
     public void OnSpawnTimerTimeout()
@@ -48,15 +59,19 @@ public class World : Node2D
         }
     }
 
-    public void OnScoreTimerTimeout()
-    {
-        Score++;
-    }
+    public void OnScoreTimerTimeout() => Score++;
 
     public void SpawnAmmoBox()
     {
         AmmoBox ammoBox = _ammoBoxScene.Instance() as AmmoBox;
         GetNode("AmmoBoxHolder").AddChild(ammoBox);
         ammoBox.Position = new Vector2(GD.Randi() % 2200, 400);
+    }
+
+    public void SpawnMedKit()
+    {
+        MedKit mk = _medKitScene.Instance() as MedKit;
+        GetNode("MedKitHolder").AddChild(mk);
+        mk.Position = new Vector2(GD.Randi() % 2200, 400);
     }
 }

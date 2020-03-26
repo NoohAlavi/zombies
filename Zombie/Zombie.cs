@@ -17,7 +17,7 @@ public class Zombie : KinematicBody2D
     private Timer _showBloodTimer;
     private Timer _deathTimer;
 
-    [Export] private float _rayCastLength = 40f;
+    [Export] private float _rayCastLength = 50f;
     [Export] private float _scale = 3f;
 
     private bool _isDead = false;
@@ -33,11 +33,6 @@ public class Zombie : KinematicBody2D
         _showBloodTimer.Connect("timeout", this, "HideBlood");
         _deathTimer = GetNode<Timer>("DeathTimer");
         _deathTimer.Connect("timeout", this, "Destroy");
-    }
-
-    public override void _Process(float delta)
-    {
-        GD.Print(_deathTimer.TimeLeft);
     }
 
     public override void _PhysicsProcess(float delta)
@@ -110,7 +105,7 @@ public class Zombie : KinematicBody2D
         _collisionShape.Disabled = true;
         Position = new Vector2(Position.x, 400f);
         Gravity = 0f;
-        _deathTimer.Start();
+        // _deathTimer.Start();
     }
 
     public void Destroy()
