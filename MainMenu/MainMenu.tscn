@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MainMenu/MainMenu.cs" type="Script" id=1]
 [ext_resource path="res://Zombie/ZombieAnim/frame0000.png" type="Texture" id=2]
 [ext_resource path="res://Player/PlayerAnim/frame0000.png" type="Texture" id=3]
+[ext_resource path="res://MainMenu/font.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 72
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 56
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -15,7 +26,7 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-color = Color( 0.372549, 0.0627451, 0.0627451, 1 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,32 +34,48 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 margin_left = 328.0
 margin_top = 72.0
-margin_right = 457.0
-margin_bottom = 86.0
-rect_scale = Vector2( 4, 4 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+margin_right = 711.0
+margin_bottom = 160.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Zombie Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayButton" type="Button" parent="."]
-margin_left = 456.0
-margin_top = 264.0
-margin_right = 494.0
-margin_bottom = 284.0
-rect_scale = Vector2( 3, 3 )
-text = "Play"
+margin_left = 416.381
+margin_top = 288.607
+margin_right = 581.381
+margin_bottom = 362.607
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "  Play  "
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ZombieIcon" type="Sprite" parent="."]
-position = Vector2( 168, 296 )
+position = Vector2( 168, 360.772 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 2 )
 
 [node name="frame0000" type="Sprite" parent="ZombieIcon"]
+visible = false
+position = Vector2( 71.2, 0.799994 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 3 )
+
+[node name="ZombieIcon2" type="Sprite" parent="ZombieIcon"]
+position = Vector2( 67.0766, 0.183498 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+flip_h = true
+
+[node name="frame0000" type="Sprite" parent="ZombieIcon/ZombieIcon2"]
+visible = false
 position = Vector2( 71.2, 0.799994 )
 scale = Vector2( -1, 1 )
 texture = ExtResource( 3 )
