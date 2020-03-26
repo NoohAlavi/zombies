@@ -3,7 +3,7 @@
 [ext_resource path="res://MainMenu/MainMenu.cs" type="Script" id=1]
 [ext_resource path="res://Zombie/ZombieAnim/frame0000.png" type="Texture" id=2]
 [ext_resource path="res://Player/PlayerAnim/frame0000.png" type="Texture" id=3]
-[ext_resource path="res://MainMenu/font.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://MainMenu/GameFont.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
@@ -32,10 +32,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 328.0
-margin_top = 72.0
-margin_right = 711.0
-margin_bottom = 160.0
+margin_left = 281.272
+margin_top = 70.4926
+margin_right = 743.272
+margin_bottom = 158.493
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Zombie Game"
@@ -44,10 +44,10 @@ __meta__ = {
 }
 
 [node name="PlayButton" type="Button" parent="."]
-margin_left = 416.381
-margin_top = 288.607
-margin_right = 581.381
-margin_bottom = 362.607
+margin_left = 369.155
+margin_top = 289.864
+margin_right = 669.155
+margin_bottom = 363.864
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
